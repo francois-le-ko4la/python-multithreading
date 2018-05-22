@@ -1,0 +1,31 @@
+running pytest
+Searching for pytest
+Best match: pytest 3.5.1
+Processing pytest-3.5.1-py3.6.egg
+
+Using /home/ko4la/GIT/python-multithreading/.eggs/pytest-3.5.1-py3.6.egg
+running egg_info
+writing pthread.egg-info/PKG-INFO
+writing dependency_links to pthread.egg-info/dependency_links.txt
+writing top-level names to pthread.egg-info/top_level.txt
+reading manifest file 'pthread.egg-info/SOURCES.txt'
+reading manifest template 'MANIFEST.in'
+writing manifest file 'pthread.egg-info/SOURCES.txt'
+running build_ext
+============================= test session starts ==============================
+platform linux -- Python 3.6.5, pytest-3.5.1, py-1.5.3, pluggy-0.6.0 -- /usr/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/ko4la/GIT/python-multithreading, inifile: setup.cfg
+collecting ... collected 9 items
+
+tests/test_doctest.py::RunDocTest::test_mod___about__.py PASSED          [ 11%]
+tests/test_doctest.py::RunDocTest::test_mod___init__.py PASSED           [ 22%]
+tests/test_doctest.py::RunDocTest::test_mod_thread.py PASSED             [ 33%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test___about__.py PASSED      [ 44%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test___init__.py PASSED       [ 55%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_setup.py PASSED          [ 66%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_test_doctest.py PASSED   [ 77%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_test_pycodestyle.py PASSED [ 88%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_thread.py PASSED         [100%]
+
+=========================== 9 passed in 0.64 seconds ===========================
