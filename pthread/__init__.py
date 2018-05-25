@@ -61,6 +61,8 @@ Take a look in the dev part.
 - [X] manage global var: __version__....
 - [X] improve the doc
 - [X] Release : 0.1.1
+- [X] improve Makefile
+- [X] Release : 0.1.2
 
 ## License
 
