@@ -29,20 +29,20 @@ Take a look in the dev part.
 ├── LICENSE
 ├── Makefile
 ├── pictures
-│   ├── classes_pthread.png
-│   └── packages_pthread.png
-├── pthread
+│   ├── classes_pythread.png
+│   └── packages_pythread.png
+├── pythread
 │   ├── __about__.py
 │   ├── __init__.py
 │   └── thread.py
 ├── README.md
-├── requirements.txt
 ├── runtime.txt
 ├── setup.cfg
 ├── setup.py
 └── tests
     ├── test_doctest.py
     └── test_pycodestyle.py
+
 ```
 
 ## Todo:
@@ -63,6 +63,9 @@ Take a look in the dev part.
 - [X] Release : 0.1.1
 - [X] improve Makefile
 - [X] Release : 0.1.2
+- [X] validate (un)install process
+- [X] rename module : pthread => pythread
+- [X] Release : 1.0.0
 
 ## License
 
@@ -71,5 +74,5 @@ This package is distributed under the [GPLv3 license](./LICENSE)
 """
 
 
-import pthread.__about__
-from pthread.thread import PThread
+import pythread.__about__
+from pythread.thread import PThread

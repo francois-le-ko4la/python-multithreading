@@ -18,18 +18,21 @@ default:
 	@echo '    make test       test'
 	@echo
 
+build:
+	@./setup.py sdist bdist_wheel
+
 dev:
 	@pip3 install -e .
 
 install:
 	@$(MAKE) clean
-	#@./setup.py sdist bdist_wheel
-	@sudo -H pip3 install . --process-dependency-links --trusted-host github.com
+	@$(MAKE) build
+	@sudo -H pip3 install .
 
 upgrade:
 	@$(MAKE) clean
-	@./setup.py sdist bdist_wheel
-	@sudo -H pip3 install . --process-dependency-links --trusted-host github.com --upgrade
+	@$(MAKE) build
+	@sudo -H pip3 install . --upgrade
 
 uninstall:
 	@pip3 show $(PACKAGE_NAME)
@@ -46,19 +49,15 @@ fulldoc:
 	@$(MAKE) doc
 
 doc:
-	@export_docstring2md.py -i $(PACKAGE_DIR) -o README.md -r requirements.txt -t runtime.txt -u pictures/classes_$(PACKAGE_NAME).png
+	@export_docstring2md.py -i $(PACKAGE_DIR) -o README.md -t runtime.txt -u pictures/classes_$(PACKAGE_NAME).png
 
 release:
 	@$(MAKE) clean
 	@$(MAKE) install
 	@$(MAKE) doc
 
-requirements:
-	@pipreqs . --force
-
 publish:
 	@$(MAKE) test
-	@pipreqs .
 	@git add .
 	@git commit
 	@git push

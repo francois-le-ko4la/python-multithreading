@@ -1,23 +1,24 @@
 running pytest
 running egg_info
-writing pthread.egg-info/PKG-INFO
-writing dependency_links to pthread.egg-info/dependency_links.txt
-writing requirements to pthread.egg-info/requires.txt
-writing top-level names to pthread.egg-info/top_level.txt
-reading manifest file 'pthread.egg-info/SOURCES.txt'
-writing manifest file 'pthread.egg-info/SOURCES.txt'
+writing pythread.egg-info/PKG-INFO
+writing dependency_links to pythread.egg-info/dependency_links.txt
+writing requirements to pythread.egg-info/requires.txt
+writing top-level names to pythread.egg-info/top_level.txt
+reading manifest file 'pythread.egg-info/SOURCES.txt'
+writing manifest file 'pythread.egg-info/SOURCES.txt'
 running build_ext
 ============================= test session starts ==============================
 platform linux -- Python 3.6.5, pytest-3.5.1, py-1.5.3, pluggy-0.6.0 -- /usr/bin/python3
 cachedir: .pytest_cache
 rootdir: /home/ko4la/GIT/python-multithreading, inifile: setup.cfg
-collecting ... collected 6 items
+collecting ... collected 7 items
 
-tests/test_pycodestyle.py::RunPyCodeStyle::test___about__.py PASSED      [ 16%]
-tests/test_pycodestyle.py::RunPyCodeStyle::test___init__.py PASSED       [ 33%]
-tests/test_pycodestyle.py::RunPyCodeStyle::test_setup.py PASSED          [ 50%]
-tests/test_pycodestyle.py::RunPyCodeStyle::test_test_doctest.py PASSED   [ 66%]
-tests/test_pycodestyle.py::RunPyCodeStyle::test_test_pycodestyle.py PASSED [ 83%]
+tests/test_doctest.py::RunDocTest::test_mod_thread.py PASSED             [ 14%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test___about__.py PASSED      [ 28%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test___init__.py PASSED       [ 42%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_setup.py PASSED          [ 57%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_test_doctest.py PASSED   [ 71%]
+tests/test_pycodestyle.py::RunPyCodeStyle::test_test_pycodestyle.py PASSED [ 85%]
 tests/test_pycodestyle.py::RunPyCodeStyle::test_thread.py PASSED         [100%]
 
-=========================== 6 passed in 0.10 seconds ===========================
+=========================== 7 passed in 0.64 seconds ===========================

@@ -21,26 +21,25 @@ Take a look in the dev part.
 
 ## Project Structure
 ```
-..
+.
 ├── last_check.log
 ├── LICENSE
 ├── Makefile
-├── MANIFEST.in
 ├── pictures
-│   ├── classes_pthread.png
-│   └── packages_pthread.png
-├── pthread
+│   ├── classes_pythread.png
+│   └── packages_pythread.png
+├── pythread
 │   ├── __about__.py
 │   ├── __init__.py
 │   └── thread.py
 ├── README.md
-├── requirements.txt
 ├── runtime.txt
 ├── setup.cfg
 ├── setup.py
 └── tests
     ├── test_doctest.py
     └── test_pycodestyle.py
+
 ```
 
 ## Todo:
@@ -54,6 +53,16 @@ Take a look in the dev part.
 - [X] Run PEP8 validation
 - [X] Clean & last check
 - [X] Release
+- [X] change (un)install process
+- [X] remove MANIFEST.in
+- [X] manage global var: __version__....
+- [X] improve the doc
+- [X] Release : 0.1.1
+- [X] improve Makefile
+- [X] Release : 0.1.2
+- [X] validate (un)install process
+- [X] rename module : pthread => pythread
+- [X] Release : 1.0.0
 
 ## License
 
@@ -65,15 +74,8 @@ This package is distributed under the [GPLv3 license](./LICENSE)
 python-3.6.x
 
 ```
-### Requirements
-
-```
-setuptools==39.0.1
-pycodestyle==2.3.1
-
-```
 ### UML Diagram
-![alt text](pictures/classes_pthread.png)
+![alt text](pictures/classes_pythread.png)
 
 ### Objects
 [PThread()](#pthread)<br />
@@ -95,7 +97,7 @@ This class subclassed Thread class :
 We specify the activity by passing a callable object to the constructor.
 
 Use:
-    >>> from pthread import PThread
+    >>> from pythread import PThread
     >>> import time
     >>> def mytask(): print("lorem ipsum dolor sit amet consectetur")
     >>> mthr = PThread(mytask, 0.1)

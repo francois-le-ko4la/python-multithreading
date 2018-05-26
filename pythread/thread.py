@@ -24,7 +24,7 @@ class PThread(Thread):
     We specify the activity by passing a callable object to the constructor.
 
     Use:
-        >>> from pthread import PThread
+        >>> from pythread import PThread
         >>> import time
         >>> def mytask(): print("lorem ipsum dolor sit amet consectetur")
         >>> mthr = PThread(mytask, 0.1)
