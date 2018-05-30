@@ -19,17 +19,12 @@ default:
 	@echo
 
 build:
-	@./setup.py sdist bdist_wheel
+	@./setup.py release
 
 dev:
 	@pip3 install -e .
 
 install:
-	@$(MAKE) clean
-	@$(MAKE) build
-	@sudo -H pip3 install .
-
-upgrade:
 	@$(MAKE) clean
 	@$(MAKE) build
 	@sudo -H pip3 install . --upgrade

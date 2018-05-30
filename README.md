@@ -3,6 +3,14 @@
 
 This package provide a simple way to manage multithreading in python project.
 
+## Why:
+- Clean the main code
+- Simplify multithreading use with general objectives
+
+## Why we will never use it:
+- :x: All the code use multithreading
+- :x: We use complex mecanisme between object: sync between object or data issue
+
 ## Setup:
 ```shell
 git clone https://github.com/francois-le-ko4la/python-multithreading.git
@@ -63,26 +71,35 @@ Take a look in the dev part.
 - [X] validate (un)install process
 - [X] rename module : pthread => pythread
 - [X] Release : 1.0.0
+- [X] fix setup
+- [X] improve docstring
+- [X] update doc
+- [X] Release : 1.1.0
 
 ## License
 
 This package is distributed under the [GPLv3 license](./LICENSE)
-
 ### Runtime
 
 ```
+
 python-3.6.x
 
+
 ```
+
 ### UML Diagram
 ![alt text](pictures/classes_pythread.png)
 
+
 ### Objects
+
 [PThread()](#pthread)<br />
 [@Property PThread.func](#property-pthreadfunc)<br />
 [PThread.start()](#pthreadstart)<br />
 [PThread.run()](#pthreadrun)<br />
 [PThread.stop()](#pthreadstop)<br />
+
 
 #### PThread()
 ```python
@@ -96,22 +113,75 @@ This class subclassed Thread class :
 
 We specify the activity by passing a callable object to the constructor.
 
+Why:
+    - clean the main code
+    - dedicate import Thread
+    - simplify multithreading use with generic objectives
+
+Why we will neve use it:
+    - all the code use multithreading
+    - we use complex mecanisme between object: sync between object or
+      data issue
+
+    +----------+
+    |          |   define with func & elapse
+  -->   INIT   +-------------------+----------------------+
+    |          |                   |                      |
+    +----------+                   |                      |
+                                   |                      |
+         +----------------------------------------------+ |
+         |                         |                    | |
+         |               +-----------------------------------------+
+         |               | RUN     |                    | |        |
+    +----v-----+         |    +----v-----+          +---+-v---+    |
+    |          |         |    |          |          |         |    |
+  -->  START   +-------------->   TASK   +---------->  TIMER  |    |
+    |          |         |    |          |          |         |    |
+    +----------+         |    +----^-----+          +----^----+    |
+                         |         |                     |         |
+                         +-----------------------------------------+
+                                   |                     |
+    +----------+     disable       |                     |
+    |          +-------------------+         cancel      |
+  -->   STOP   +-----------------------------------------+
+    |          +--------------------+
+    +----------+                    |
+                              +-----v-----+
+                              |           |
+                              |JOIN Thread|
+                              |           |
+                              +-----------+
+
 Use:
+    >>> # Import the module :
     >>> from pythread import PThread
     >>> import time
+    >>> # define a task
     >>> def mytask(): print("lorem ipsum dolor sit amet consectetur")
-    >>> mthr = PThread(mytask, 0.1)
-    >>> mthr.start() ; mthr.start()
-    Traceback (most recent call last):
-    ...
-    RuntimeError: threads can only be started once
-    >>> mthr.stop()
+    >>> # We want to run "mytask" in a thread and repeat the task:
     >>> mthr = PThread(mytask, 0.1)
     >>> mthr.start() ; print("other task");time.sleep(0.3) ; mthr.stop()
     lorem ipsum dolor sit amet consectetur
     other task
     lorem ipsum dolor sit amet consectetur
     lorem ipsum dolor sit amet consectetur
+    >>> # We want to run "mytask" in a thread one time:
+    >>> mthr = PThread(mytask).start() ; print("other task")
+    lorem ipsum dolor sit amet consectetur
+    other task
+    >>> # oups - start issue:
+    >>> mthr = PThread(mytask, 0.1)
+    >>> mthr.start() ; mthr.start()
+    Traceback (most recent call last):
+    ...
+    RuntimeError: threads can only be started once
+    >>> # Stop a not repeatable task:
+    >>> mthr = PThread(mytask)
+    >>> mthr.start() ; print("other task")
+    lorem ipsum dolor sit amet consectetur
+    other task
+    >>> mthr.stop()
+    >>> # a test avoid the AttributeError exception
 ```
 
 ##### @Property PThread.func
@@ -180,4 +250,3 @@ def PThread.stop(self):
 > <b>Returns:</b><br />
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  None.<br />
 > <br />
-

@@ -6,6 +6,15 @@
 
 This package provide a simple way to manage multithreading in python project.
 
+## Why:
+- Clean the main code
+- Simplify multithreading use with general objectives
+
+## Why we will never use it:
+- :x: All the code use multithreading
+- :x: We use complex mecanisme between object: sync between object or data
+  issue
+
 ## Setup:
 ```shell
 git clone https://github.com/francois-le-ko4la/python-multithreading.git
@@ -66,6 +75,10 @@ Take a look in the dev part.
 - [X] validate (un)install process
 - [X] rename module : pthread => pythread
 - [X] Release : 1.0.0
+- [X] fix setup
+- [X] improve docstring
+- [X] update doc
+- [X] Release : 1.1.0
 
 ## License
 
@@ -74,5 +87,11 @@ This package is distributed under the [GPLv3 license](./LICENSE)
 """
 
 
-import pythread.__about__
+from pytconfig.__about__ import (
+    __version__,
+    __email__,
+    __author__,
+    __url__,
+    __license__
+)
 from pythread.thread import PThread

@@ -23,26 +23,84 @@ class PThread(Thread):
 
     We specify the activity by passing a callable object to the constructor.
 
+    Why:
+        - clean the main code
+        - dedicate import Thread
+        - simplify multithreading use with generic objectives
+
+    Why we will never use it:
+        - all the code use multithreading
+        - we use complex mecanisme between object: sync between object or
+          data issue
+
+        +----------+
+        |          |   define with func & elapse
+      -->   INIT   +-------------------+----------------------+
+        |          |                   |                      |
+        +----------+                   |                      |
+                                       |                      |
+             +----------------------------------------------+ |
+             |                         |                    | |
+             |               +-----------------------------------------+
+             |               | RUN     |                    | |        |
+        +----v-----+         |    +----v-----+          +---+-v---+    |
+        |          |         |    |          |          |         |    |
+      -->  START   +-------------->   TASK   +---------->  TIMER  |    |
+        |          |         |    |          |          |         |    |
+        +----------+         |    +----^-----+          +----^----+    |
+                             |         |                     |         |
+                             +-----------------------------------------+
+                                       |                     |
+        +----------+     disable       |                     |
+        |          +-------------------+         cancel      |
+      -->   STOP   +-----------------------------------------+
+        |          +--------------------+
+        +----------+                    |
+                                  +-----v-----+
+                                  |           |
+                                  |JOIN Thread|
+                                  |           |
+                                  +-----------+
+
     Use:
+        >>> # Import the module :
         >>> from pythread import PThread
         >>> import time
+        >>> # define a task
         >>> def mytask(): print("lorem ipsum dolor sit amet consectetur")
-        >>> mthr = PThread(mytask, 0.1)
-        >>> mthr.start() ; mthr.start()
-        Traceback (most recent call last):
-        ...
-        RuntimeError: threads can only be started once
-        >>> mthr.stop()
+        >>> # We want to run "mytask" in a thread and repeat the task:
         >>> mthr = PThread(mytask, 0.1)
         >>> mthr.start() ; print("other task");time.sleep(0.3) ; mthr.stop()
         lorem ipsum dolor sit amet consectetur
         other task
         lorem ipsum dolor sit amet consectetur
         lorem ipsum dolor sit amet consectetur
+        >>> # We want to run "mytask" in a thread one time:
+        >>> mthr = PThread(mytask).start() ; print("other task")
+        lorem ipsum dolor sit amet consectetur
+        other task
+        >>> # oups - start issue:
+        >>> mthr = PThread(mytask, 0.1)
+        >>> mthr.start() ; mthr.start()
+        Traceback (most recent call last):
+        ...
+        RuntimeError: threads can only be started once
+        >>> # Stop a not repeatable task:
+        >>> mthr = PThread(mytask)
+        >>> mthr.start() ; print("other task")
+        lorem ipsum dolor sit amet consectetur
+        other task
+        >>> mthr.stop()
+        >>> # a test avoid the AttributeError exception
 
     """
-    def __init__(self, func, elapse):
+    def __init__(self, func, elapse=0):
         Thread.__init__(self)
+
+        self.__repeat = True
+        if elapse is 0:
+            self.__repeat = False
+
         self.__running = True
         self.__timer = None
         self.__func = func
@@ -96,7 +154,8 @@ class PThread(Thread):
             raise RuntimeError("thread.__init__() not called")
 
         self.__func()
-        if self.__running:
+
+        if self.__running and self.__repeat:
             self.__timer = Timer(self.__elapse, self.run)
             self.__timer.start()
 
@@ -113,7 +172,8 @@ class PThread(Thread):
             None.
         """
         self.__running = False
-        self.__timer.cancel()
+        if self.__timer is not None:
+            self.__timer.cancel()
         self.join()
 
 
